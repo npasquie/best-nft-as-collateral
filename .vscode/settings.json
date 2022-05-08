@@ -1,0 +1,8 @@
+{
+    "json.schemas": [
+        {
+        "css.lint.unknownAtRules": "ignore"
+
+        }
+    ]
+}
