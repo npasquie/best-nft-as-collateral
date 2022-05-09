@@ -8,17 +8,17 @@ const myLoader = ({ src }) => {
 
 const Navbar = () => {
   return (
-    <nav className="bg-blue flex h-15 items-center justify-between flex-wrap">
+    <nav className="bg-blue flex h-2 items-center justify-between flex-wrap">
       <div className="flex items-center flex-shrink-0 text-dark ">
         <Image
-          className=" block h-2 w-auto"
-          //layout="intrinsic"
+          className=" block  w-auto object-cover"
+          //layout="responsive"
           loader={myLoader}
           src={logo}
-          height={100}
-          width={250}
+          height={150}
+          width={200}
         />
-        <span className="font-semibold text-3xl tracking-tight">
+        <span className="font-semibold text-3xl text-white tracking-tight">
           NFTrade
         </span>
       </div>
