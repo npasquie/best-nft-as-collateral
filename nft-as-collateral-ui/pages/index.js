@@ -36,7 +36,7 @@ export default function Home() {
           <span className={styles.logo}>
             <Image 
             loader={myLoader}
-            src="/vercel.svg" alt="Vercel Logo" width={72}  height={16} className="fill-white" />
+            src="/vercel.svg" alt="Vercel Logo" width={72} color="white" height={16} className="fill-white" />
           </span>
         </a>
       </footer>
