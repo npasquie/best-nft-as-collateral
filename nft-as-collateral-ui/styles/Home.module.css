@@ -1,3 +1,6 @@
+#__next {
+  background-color: blue;
+}
 .container {
   with:100vw;
 }

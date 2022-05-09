@@ -34,8 +34,8 @@ const Navbar = () => {
           </svg>
         </button>
       </div>
-    <div class="w-full block flex-grow flex-end lg:flex lg:items-center lg:w-auto">
-    <div class="text-xl lg:flex-grow lg:flex lg:justify-end flex-end text-white">
+    <div className="w-full block flex-grow flex-end lg:flex lg:items-center lg:w-auto">
+    <div className="text-xl lg:flex-grow lg:flex lg:justify-end flex-end text-white">
         <Link
         href="/#dashbord"
         passHref>
