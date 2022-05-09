@@ -1,6 +1,7 @@
 import logo from "../../public/Frame 9.svg";
 import Image from "next/image";
 import Link from "next/link"
+import { ConnectButton } from "web3uikit";
 const myLoader = ({ src }) => {
   return `${src}`;
 };
@@ -58,6 +59,7 @@ const Navbar = () => {
         </Link>
     </div>
     </div>
+    <ConnectButton />
     </nav>
   );
 };
