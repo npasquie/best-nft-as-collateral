@@ -5,9 +5,9 @@ const PoolCard = ({name, src, myLoader}) => {
     return (
         
 
-  <div className="flex flex-col rounded-lg shadow-lg m-7 p-10 bg-white w-100 lg:w-full">
+  <div className="flex flex-col  lg:w-96 rounded-lg shadow-lg m-7 p-10 bg-white ">
     <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
-      <Image className="rounded-t-lg" src={src} layout="responsive" width={300} height={250} loader={myLoader}  alt="poolimage"/>
+      <Image className="rounded-t-lg" src={src} layout="responsive" width={800} height={650} loader={myLoader}  alt="poolimage"/>
     </a>
     <div className="p-6">
       {/* <h5 className="text-gray-900 text-xl font-medium mb-2"></h5> */}

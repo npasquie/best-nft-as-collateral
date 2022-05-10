@@ -21,7 +21,7 @@ const Pool = ({ myLoader }) => {
       <div className="text-center">
         <h1 className="text-white text-6xl m-4">Welcome</h1>
       </div>
-      <div className=" lg:flex lg:justify-around flex-row">
+      <div className=" flex lg:flex-row flex-col  justify-around">
         {cardData.map((item) => (
           <PoolCard
             myLoader={myLoader}
