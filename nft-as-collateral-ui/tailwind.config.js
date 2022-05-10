@@ -6,8 +6,14 @@ module.exports = {
   theme: {
     colors: {
       'blue':'#03071E', 
+      transparent: 'transparent',
       current: 'currentColor',
       'white': '#ffffff',
+      'yellow':{
+                  100:'#FFBA08',
+                  200:'#E3B84B',
+
+              },
     },
     extend: {},
   },
