@@ -49,7 +49,16 @@ const Navbar = () => {
     >
     <div className="text-xl flex flex-col items-center lg:flex-row lg:inline-flex lg:ml-auto text-white">
         <Link
-        href="/#dashbord"
+        href="#/"
+        passHref>
+            <a  
+            onClick={()=> {setshow(!show)}}
+            className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue hover:bg-yellow-200">
+                Home
+            </a>
+        </Link>
+        <Link
+        href="#/dashbord"
         passHref>
             <a  
             onClick={()=> {setshow(!show)}}
@@ -58,7 +67,7 @@ const Navbar = () => {
             </a>
         </Link>
         <Link
-        href="/#pools"
+        href="#/pools"
         passHref>
             <a  
              onClick={()=> {setshow(!show)}}
@@ -67,7 +76,7 @@ const Navbar = () => {
             </a>
         </Link>
         <Link
-        href="/#Docs"
+        href="#/Docs"
         passHref>
             <a 
             onClick={()=> {setshow(!show)}}
