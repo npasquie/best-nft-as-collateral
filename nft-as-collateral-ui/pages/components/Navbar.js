@@ -20,9 +20,7 @@ const Navbar = () => {
           height={150}
           width={200}
         />
-        <span className="font-semibold text-3xl text-white uppercase tracking-wide">
-          NFTrade
-        </span>
+       
       </a>
       <div className="lg:hidden">
         <button 
