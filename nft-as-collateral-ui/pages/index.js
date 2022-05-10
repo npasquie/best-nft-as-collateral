@@ -18,9 +18,6 @@ export default function Home() {
         <Navbar />
       </header>
       <main className={styles.main}>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
         <Pool myLoader={myLoader} />
         
       </main>
