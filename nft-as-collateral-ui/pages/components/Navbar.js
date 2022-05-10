@@ -10,7 +10,7 @@ const myLoader = ({ src }) => {
 const Navbar = () => {
   const [show, setshow] = useState(false)
   return (
-    <nav className="bg-blue flex h-2 items-center justify-between flex-wrap">
+    <nav className="bg-blue flex h-auto items-center justify-between flex-wrap">
       <a href="#/" className=" items-center inline-flex text-dark ">
         <Image
           className=" block  w-auto object-cover"

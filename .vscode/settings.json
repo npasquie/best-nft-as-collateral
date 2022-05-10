@@ -4,5 +4,7 @@
         "css.lint.unknownAtRules": "ignore"
 
         }
-    ]
+    ],
+    "js/ts.implicitProjectConfig.strictFunctionTypes": false,
+    "js/ts.implicitProjectConfig.experimentalDecorators": true
 }

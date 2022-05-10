@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
 import Navbar from './components/Navbar';
+import Pool from './components/pools';
 const myLoader = ({ src }) => {
   return `${src}`;
 };
@@ -20,10 +21,8 @@ export default function Home() {
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-
+        <Pool myLoader={myLoader} />
         
-
-      
       </main>
 
       <footer className={styles.footer}>
