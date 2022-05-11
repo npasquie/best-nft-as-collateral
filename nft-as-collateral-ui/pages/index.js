@@ -18,7 +18,7 @@ export default function Home() {
         <Navbar />
       </header>
       <main className={styles.main}>
-        {/* <Pool myLoader={myLoader} /> */}
+        <Pool myLoader={myLoader} />
         
       </main>
 

@@ -22,14 +22,17 @@ const Pool = ({ myLoader }) => {
         <h1 className="text-white text-6xl m-4">Welcome</h1>
       </div>
       <div className=" flex lg:flex-row flex-col  justify-around">
-        {cardData.map((item) => (
-          <PoolCard
-            myLoader={myLoader}
-            key={item.id}
-            name={item.name}
-            src={item.src}
-          />
-        ))}
+        {cardData.map((item) => {
+            return (
+
+                <PoolCard
+                  myLoader={myLoader}
+                  key={item.id}
+                  name={item.name}
+                  src={item.src}
+                />
+            )
+})}
       </div>
     </div>
   );
