@@ -1,4 +1,4 @@
-import logo from "../../public/Frame 9.svg";
+import logo from "../public/Frame 9.svg";
 import Image from "next/image";
 import Link from "next/link"
 import { ConnectButton } from "web3uikit";

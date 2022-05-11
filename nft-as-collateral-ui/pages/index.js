@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css';
-import Navbar from './components/Navbar';
-import Pool from './components/pools/index';
+import Navbar from '../components/Navbar';
+import Pool from '../components/pools';
 const myLoader = ({ src }) => {
   return `${src}`;
 };
