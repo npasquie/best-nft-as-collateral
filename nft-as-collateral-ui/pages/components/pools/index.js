@@ -2,7 +2,7 @@ import PoolCard from "./PoolCard";
 import loan from "../../../public/vectordesign (5).svg";
 import borrow from "../../../public/vectordesign (6).svg";
 
-const cardData = [
+export const cardData = [
   {
     id: "borrow",
     name: "borrow",
