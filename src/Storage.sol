@@ -15,6 +15,7 @@ abstract contract Storage {
     /// @notice made by suppliers for borrowers
     /// @dev this is a double-linked list
     struct OfferBook {
+        mapping(uint256 => Offer) offers;
         uint256 firstId;
         IERC721 collection;
         uint256 lastIdCreated;
@@ -28,10 +29,9 @@ abstract contract Storage {
 
     /// @notice fixed-point decimal number with 27 decimals
     struct Ray {
-        uint256 v;
+        uint256 ray;
     }
 
-    /// @dev offerBookId => OfferId => Offer
-    mapping(uint256 => mapping(uint256 => Offer)) public offers;
+    /// @dev offerBookId => OfferBook
     mapping(uint256 => OfferBook) public books;
 }
