@@ -18,13 +18,15 @@ abstract contract Storage {
         mapping(uint256 => Offer) offers;
         uint256 firstId;
         IERC721 collection;
-        uint256 lastIdCreated;
+        uint256 numberOfOffers;
     }
 
     struct Offer {
+        bool isRemoved;
         uint256 amount;
         Ray valueToLoan;
         uint256 nextId;
+        uint256 prevId;
     }
 
     /// @notice fixed-point decimal number with 27 decimals

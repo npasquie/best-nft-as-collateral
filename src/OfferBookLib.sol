@@ -2,38 +2,55 @@
 pragma solidity 0.8.13;
 
 import "./Storage.sol";
-import "forge-std/console.sol";
 
 library OfferBookLib {
     /// @return offerId the id of the newly created offer
     function insert(Storage.OfferBook storage book, uint256 amount, Storage.Ray calldata valueToLoan) external returns(uint256) {
-        console.log("hello");
-        uint256 cursor = book.firstId;
-        book.lastIdCreated++; // id 0 is reserved to null
-        uint256 newId = book.lastIdCreated;
+        require(valueToLoan.ray > 0);
+        
         uint256 firstId = book.firstId;
+        uint256 cursor = firstId;
+        book.numberOfOffers++; // id 0 is reserved to null
+        uint256 newId = book.numberOfOffers;
 
         book.offers[newId].amount = amount;
         book.offers[newId].valueToLoan.ray = valueToLoan.ray;
-        if (cursor == 0) { // insertion in empty bookn
-            console.log("hello");
-            book.firstId = newId;
-            console.log(newId);
-            return newId;
-        }
-        uint256 prevCursor = cursor;
-        while (valueToLoan.ray <= book.offers[cursor].valueToLoan.ray) {
-            prevCursor = cursor;
+
+        uint256 prevId = cursor;
+
+        while (book.offers[cursor].valueToLoan.ray >= valueToLoan.ray) {
+            prevId = cursor;
             cursor = book.offers[cursor].nextId;
         }
-        uint256 newNext = book.offers[cursor].nextId;
-        if (cursor == firstId){
+
+        if (cursor == firstId){ // first place
             book.firstId = newId;
-        } else {
-            book.offers[cursor].nextId = newId;
+            book.offers[newId].nextId = cursor;
+            if (cursor != 0){
+                book.offers[cursor].prevId = newId;
+            }
+        } else { // normal scenario
+            if (cursor != 0){
+                book.offers[cursor].prevId = newId;
+            }
+            book.offers[newId].nextId = cursor;
+            book.offers[newId].prevId = prevId;
+            book.offers[prevId].nextId = newId;
         }
-        book.offers[newId].nextId = newNext;
         
         return newId;
+    }
+
+    function remove(Storage.OfferBook storage book, uint256 offerId) external {
+        require(offerId <= book.numberOfOffers);
+        require(!book.offers[offerId].isRemoved);
+
+        book.offers[offerId].isRemoved = true;
+
+        uint256 nextId = book.offers[offerId].nextId;
+        uint256 prevId = book.offers[offerId].prevId;
+
+        book.offers[prevId].nextId = nextId;
+        book.offers[nextId].prevId = prevId;
     }
 }
