@@ -20,9 +20,9 @@ contract TestOfferBookLib is Storage, Test {
     function testInsertInEmpty(uint256 amount, uint256 valueToLoan) public {
         fvm.assume(valueToLoan > 0);
         OfferBook storage book = books[testIndex];
-        book.insert(amount, Storage.Ray(valueToLoan));
+        book.insert(amount, valueToLoan);
         require(book.offers[book.firstId].amount == amount, "amount");
-        require(book.offers[book.firstId].valueToLoan.ray == valueToLoan, "valueToLoan");
+        require(book.offers[book.firstId].valueToLoan == valueToLoan, "valueToLoan");
         require(book.firstId == 1, "firstId");
         require(book.numberOfOffers == 1, "numberOfOffers");
         require(book.offers[1].nextId == 0, "nextId");
@@ -34,17 +34,17 @@ contract TestOfferBookLib is Storage, Test {
 
         OfferBook storage book = books[testIndex];
 
-        book.insert(124, Storage.Ray(235));
-        book.insert(342, Storage.Ray(345));
-        book.insert(564, Storage.Ray(43));
-        book.insert(23, Storage.Ray(65));
-        book.insert(564, Storage.Ray(23));
+        book.insert(124, 235);
+        book.insert(342, 345);
+        book.insert(564, 43);
+        book.insert(23, 65);
+        book.insert(564, 23);
 
         cursor = book.firstId;
         
         for(uint256 i; i < book.numberOfOffers; i++){
-            value = book.offers[cursor].valueToLoan.ray;        
-            require(value >= book.offers[book.offers[cursor].nextId].valueToLoan.ray, "order");
+            value = book.offers[cursor].valueToLoan;
+            require(value >= book.offers[book.offers[cursor].nextId].valueToLoan, "order");
             if (book.offers[cursor].nextId == 0) {
                 require(i == book.numberOfOffers - 1, "number");
             }
