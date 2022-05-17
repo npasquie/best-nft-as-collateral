@@ -4,6 +4,8 @@ pragma solidity 0.8.13;
 import "./Storage.sol";
 
 library OfferBookLib {
+    using OfferBookLib for OfferBook;
+
     /// @return offerId the id of the newly created offer
     /// @dev amount and valueToLoan must have been checked before calling
     /// @dev amount and valueToLoan must both be above 0
@@ -16,10 +18,8 @@ library OfferBookLib {
         uint256 cursor = firstId;
         book.numberOfOffers++; // id 0 is reserved to null
         uint256 newId = book.numberOfOffers;
-
         book.offer[newId].amount = amount;
         book.offer[newId].valueToLoan = valueToLoan;
-
         uint256 prevId = cursor;
 
         while (book.offer[cursor].valueToLoan >= valueToLoan) {
@@ -28,18 +28,9 @@ library OfferBookLib {
         }
 
         if (cursor == firstId) {
-            book.firstId = newId;
-            book.offer[newId].nextId = cursor;
-            if (cursor != 0) {
-                book.offer[cursor].prevId = newId;
-            }
+            book.insertAsFirst(newId, cursor);
         } else {
-            if (cursor != 0) {
-                book.offer[cursor].prevId = newId;
-            }
-            book.offer[newId].nextId = cursor;
-            book.offer[newId].prevId = prevId;
-            book.offer[prevId].nextId = newId;
+            book.insertBetween(newId, prevId, cursor);
         }
 
         return newId;
@@ -63,5 +54,31 @@ library OfferBookLib {
         if (nextId != 0) {
             book.offer[nextId].prevId = prevId;
         }
+    }
+
+    function insertAsFirst(
+        OfferBook storage book,
+        uint256 newId,
+        uint256 nextId
+    ) internal {
+        book.firstId = newId;
+        book.offer[newId].nextId = nextId;
+        if (nextId != 0) {
+            book.offer[nextId].prevId = newId;
+        }
+    }
+
+    function insertBetween(
+        OfferBook storage book,
+        uint256 newId,
+        uint256 prevId,
+        uint256 nextId
+    ) internal {
+        if (nextId != 0) {
+            book.offer[nextId].prevId = newId;
+        }
+        book.offer[newId].nextId = nextId;
+        book.offer[newId].prevId = prevId;
+        book.offer[prevId].nextId = newId;
     }
 }

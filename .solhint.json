@@ -4,7 +4,8 @@
     "max-line-length": ["error", 80],
     "function-max-lines": ["error", 25],
     "code-complexity": ["warn", 7],
-    "ordering": "warn",
-    "compiler-version": ["error", "0.8.13"]
+    "ordering": "error",
+    "compiler-version": ["error", "0.8.13"],
+    "func-visibility": ["error", { "ignoreConstructors": true }]
   }
 }

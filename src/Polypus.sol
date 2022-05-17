@@ -18,7 +18,7 @@ contract Polypus is Storage, Ownable {
     /// PUBLIC ///
 
     /// @notice supplies to given market with given value to loan.
-    /// @notice updates value to loan and adds the new liquidity if already supplied.
+    /// @notice updates value to loan and adds the new liquidity.
     function supply(IERC721 asset, uint256 valueToLoan) public payable {
         require(valueToLoan >= minimumValueToLoan);
         require(bookOf[asset].isActive);
