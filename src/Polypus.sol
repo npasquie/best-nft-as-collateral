@@ -11,30 +11,36 @@ contract Polypus is Storage, Ownable {
     using OfferBookLib for OfferBook;
 
     /// ADMIN ///
-    function createMarket(IERC721 collection) onlyOwner public {
-        bookOfId[numberOfBooks].isActive = true;
-        bookOfId[numberOfBooks].collection = collection;
+    function createMarket(IERC721 asset) public onlyOwner {
+        bookOf[asset].isActive = true;
     }
 
     /// PUBLIC ///
-    
+
     /// @notice supplies to given market with given value to loan.
     /// @notice updates value to loan and adds the new liquidity if already supplied.
-    function supply(uint256 marketId, uint256 valueToLoan) public payable {
+    function supply(IERC721 asset, uint256 valueToLoan) public payable {
         require(valueToLoan >= minimumValueToLoan);
-        require(bookOfId[marketId].isActive);
-        
+        require(bookOf[asset].isActive);
+
         uint256 alreadySupplied;
-        uint256 prevOfferId = positionOf[msg.sender].offerIdOfMarket[marketId];
+        uint256 prevOfferId = bookOf[asset].offerIdOf[msg.sender];
 
         if (prevOfferId != 0) {
-            alreadySupplied = bookOfId[marketId].offer[prevOfferId].amount;
+            alreadySupplied = bookOf[asset].offer[prevOfferId].amount;
             require(msg.value + alreadySupplied >= minimumDepositableValue);
-            bookOfId[marketId].remove(prevOfferId);
+            bookOf[asset].remove(prevOfferId);
         } else {
             require(msg.value >= minimumDepositableValue);
         }
 
-        bookOfId[marketId].insert(msg.value + alreadySupplied, valueToLoan);
+        bookOf[asset].offerIdOf[msg.sender] = bookOf[asset].insert(
+            msg.value + alreadySupplied,
+            valueToLoan
+        );
     }
+
+    // function borrow(IERC721 asset, uint256[] calldata tokenIds) public {
+
+    // }
 }

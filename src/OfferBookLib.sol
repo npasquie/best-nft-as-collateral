@@ -5,8 +5,13 @@ import "./Storage.sol";
 
 library OfferBookLib {
     /// @return offerId the id of the newly created offer
-    /// @dev amount and valueToLoan must have been checked before calling & non 0
-    function insert(Storage.OfferBook storage book, uint256 amount, uint256 valueToLoan) external returns(uint256) {
+    /// @dev amount and valueToLoan must have been checked before calling
+    /// @dev amount and valueToLoan must both be above 0
+    function insert(
+        OfferBook storage book,
+        uint256 amount,
+        uint256 valueToLoan
+    ) external returns (uint256) {
         uint256 firstId = book.firstId;
         uint256 cursor = firstId;
         book.numberOfOffers++; // id 0 is reserved to null
@@ -22,25 +27,25 @@ library OfferBookLib {
             cursor = book.offer[cursor].nextId;
         }
 
-        if (cursor == firstId){ // first place
+        if (cursor == firstId) {
             book.firstId = newId;
             book.offer[newId].nextId = cursor;
-            if (cursor != 0){
+            if (cursor != 0) {
                 book.offer[cursor].prevId = newId;
             }
-        } else { // normal scenario
-            if (cursor != 0){
+        } else {
+            if (cursor != 0) {
                 book.offer[cursor].prevId = newId;
             }
             book.offer[newId].nextId = cursor;
             book.offer[newId].prevId = prevId;
             book.offer[prevId].nextId = newId;
         }
-        
+
         return newId;
     }
 
-    function remove(Storage.OfferBook storage book, uint256 offerId) external {
+    function remove(OfferBook storage book, uint256 offerId) external {
         require(offerId <= book.numberOfOffers);
         require(!book.offer[offerId].isRemoved);
 
@@ -49,8 +54,14 @@ library OfferBookLib {
         uint256 nextId = book.offer[offerId].nextId;
         uint256 prevId = book.offer[offerId].prevId;
 
-        if(offerId == book.firstId) {book.firstId = nextId;}
-        if(prevId !=0) {book.offer[prevId].nextId = nextId;}
-        if(nextId !=0) {book.offer[nextId].prevId = prevId;}
+        if (offerId == book.firstId) {
+            book.firstId = nextId;
+        }
+        if (prevId != 0) {
+            book.offer[prevId].nextId = nextId;
+        }
+        if (nextId != 0) {
+            book.offer[nextId].prevId = prevId;
+        }
     }
 }
