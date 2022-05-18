@@ -16,6 +16,7 @@ contract Polypus is Storage, Ownable, BorrowLogic {
 
     /// ADMIN ///
 
+    /// @notice makes an asset available on the market
     function createMarket(IERC721 asset) external onlyOwner {
         bookOf[asset].isActive = true;
     }
@@ -52,15 +53,15 @@ contract Polypus is Storage, Ownable, BorrowLogic {
         );
     }
 
+    /// @notice takes assets as collateral and gives
+    /// @notice the maximum amount loanable to the caller
     function borrow(IERC721 asset, uint256[] calldata tokenIds)
         external
         returns (uint256)
     {
         OfferBook storage book = bookOf[asset];
 
-        if (!book.isActive) {
-            revert unavailableMarket();
-        }
+        performPreChecks(book, asset, tokenIds);
 
         BorrowVars memory vars;
         vars.collateralToMatch = Ray({ray: tokenIds.length * RAY});

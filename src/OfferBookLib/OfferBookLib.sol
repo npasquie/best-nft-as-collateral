@@ -27,6 +27,7 @@ library OfferBookLib {
         book.offer[newId].supplier = supplier;
     }
 
+    /// @notice removes the offer from the book
     function remove(OfferBook storage book, uint256 offerId) internal {
         if (offerId > book.numberOfOffers) {
             revert removeNonExistentOffer();
@@ -51,6 +52,9 @@ library OfferBookLib {
         }
     }
 
+    // todo : there is a smarter way to do this as the position of the offer
+    // todo :  won't change in the book if only the amount is updated
+    /// @notice remove the offer of `id` and inserts the new offer
     function update(
         OfferBook storage book,
         Offer memory offer,

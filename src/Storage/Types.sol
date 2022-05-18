@@ -13,9 +13,10 @@ struct OfferBook {
     uint256 firstId;
     uint256 numberOfOffers;
     mapping(address => uint256) offerIdOf;
-    mapping(address => BorrowerPosition) borrowerPositionOf;
+    // mapping(address => BorrowerPosition) borrowerPositionOf;
 }
 
+/// @notice loan offer of `supplier`
 struct Offer {
     bool isRemoved;
     uint256 amount;
@@ -25,11 +26,11 @@ struct Offer {
     address supplier;
 }
 
-struct BorrowerPosition {
-    mapping(uint256 => bool) hasProvidedToken;
-    mapping(uint256 => uint256) dateOfProvidingToken;
-    uint256 nbOfTokensProvided;
-}
+// struct BorrowerPosition {
+//     mapping(uint256 => bool) hasProvidedToken;
+//     mapping(uint256 => uint256) dateOfProvidingToken;
+//     uint256 nbOfTokensProvided;
+// }
 
 // struct Loan {
 //     address borrower;
@@ -37,7 +38,7 @@ struct BorrowerPosition {
 //     IERC721 market;
 //     uint256 date;
 //     uint256 amount;
-//     uint256 amuntSold;
+//     uint256 amountSold;
 // }
 
 // struct SupplierClaims {

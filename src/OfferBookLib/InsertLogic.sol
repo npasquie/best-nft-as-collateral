@@ -6,6 +6,7 @@ import "../Storage/Storage.sol";
 // compiler doesn't allow visibility on free functions
 /* solhint-disable func-visibility */
 
+/// @notice places the offer in the book sorted from best to worst offer
 function insertLogic(
     OfferBook storage book,
     uint256 amount,
@@ -30,6 +31,7 @@ function insertLogic(
     }
 }
 
+/// @notice inserts the id as the best offer in the book
 function insertAsFirst(
     OfferBook storage book,
     uint256 newId,
@@ -42,6 +44,7 @@ function insertAsFirst(
     }
 }
 
+/// @notice inserts `newId` between `prevId` and `nextId`
 function insertBetween(
     OfferBook storage book,
     uint256 newId,

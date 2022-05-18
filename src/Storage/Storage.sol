@@ -16,6 +16,8 @@ pragma solidity 0.8.13;
 // - change Storage contract name to name not confusing with parameter type
 // - create solhint plugin to disallow more than 100-lines files
 // - allow callback on transfer (ofc strict reentrency checks to do)
+// - add natspec to every func and contract
+// - use ERC721's onERC721Received hook to auto borrow on transfer
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
