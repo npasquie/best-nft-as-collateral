@@ -4,20 +4,26 @@ pragma solidity 0.8.13;
 import "./Storage.sol";
 
 library OfferBookLib {
-    using OfferBookLib for OfferBook;
-
-    /// @return offerId the id of the newly created offer
+    /// @return newId the id of the newly created offer
     /// @dev amount and valueToLoan must have been checked before calling
     /// @dev amount and valueToLoan must both be above 0
     function insert(
         OfferBook storage book,
         uint256 amount,
-        uint256 valueToLoan
-    ) external returns (uint256) {
+        uint256 valueToLoan,
+        address supplier
+    ) internal returns (uint256 newId) {
+        if (amount == 0 || valueToLoan == 0) {
+            revert valueOutOfRange();
+        }
+        if (book.offerIdOf[supplier] != 0) {
+            revert insertForExistentSupplier();
+        }
+
         uint256 firstId = book.firstId;
         uint256 cursor = firstId;
         book.numberOfOffers++; // id 0 is reserved to null
-        uint256 newId = book.numberOfOffers;
+        newId = book.numberOfOffers;
         book.offer[newId].amount = amount;
         book.offer[newId].valueToLoan = valueToLoan;
         uint256 prevId = cursor;
@@ -26,22 +32,25 @@ library OfferBookLib {
             prevId = cursor;
             cursor = book.offer[cursor].nextId;
         }
-
         if (cursor == firstId) {
-            book.insertAsFirst(newId, cursor);
+            insertAsFirst(book, newId, cursor);
         } else {
-            book.insertBetween(newId, prevId, cursor);
+            insertBetween(book, newId, prevId, cursor);
         }
 
-        return newId;
+        book.offer[newId].supplier = supplier;
     }
 
-    function remove(OfferBook storage book, uint256 offerId) external {
-        require(offerId <= book.numberOfOffers);
-        require(!book.offer[offerId].isRemoved);
+    function remove(OfferBook storage book, uint256 offerId) internal {
+        if (offerId > book.numberOfOffers) {
+            revert removeNonExistentOffer();
+        }
+        if (book.offer[offerId].isRemoved) {
+            revert alreadyRemoved();
+        }
 
         book.offer[offerId].isRemoved = true;
-
+        book.offerIdOf[book.offer[offerId].supplier] = 0;
         uint256 nextId = book.offer[offerId].nextId;
         uint256 prevId = book.offer[offerId].prevId;
 
@@ -60,7 +69,7 @@ library OfferBookLib {
         OfferBook storage book,
         uint256 newId,
         uint256 nextId
-    ) internal {
+    ) private {
         book.firstId = newId;
         book.offer[newId].nextId = nextId;
         if (nextId != 0) {
@@ -73,7 +82,7 @@ library OfferBookLib {
         uint256 newId,
         uint256 prevId,
         uint256 nextId
-    ) internal {
+    ) private {
         if (nextId != 0) {
             book.offer[nextId].prevId = newId;
         }
