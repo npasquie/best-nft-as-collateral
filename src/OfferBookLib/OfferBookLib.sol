@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.13;
 
-import "./Storage.sol";
+import "../Storage/Storage.sol";
+import "./InsertLogic.sol";
 
 library OfferBookLib {
+    using OfferBookLib for OfferBook;
+
     /// @return newId the id of the newly created offer
     /// @dev amount and valueToLoan must have been checked before calling
     /// @dev amount and valueToLoan must both be above 0
@@ -20,24 +23,7 @@ library OfferBookLib {
             revert insertForExistentSupplier();
         }
 
-        uint256 firstId = book.firstId;
-        uint256 cursor = firstId;
-        book.numberOfOffers++; // id 0 is reserved to null
-        newId = book.numberOfOffers;
-        book.offer[newId].amount = amount;
-        book.offer[newId].valueToLoan = valueToLoan;
-        uint256 prevId = cursor;
-
-        while (book.offer[cursor].valueToLoan >= valueToLoan) {
-            prevId = cursor;
-            cursor = book.offer[cursor].nextId;
-        }
-        if (cursor == firstId) {
-            insertAsFirst(book, newId, cursor);
-        } else {
-            insertBetween(book, newId, prevId, cursor);
-        }
-
+        newId = insertLogic(book, amount, valueToLoan);
         book.offer[newId].supplier = supplier;
     }
 
@@ -65,29 +51,12 @@ library OfferBookLib {
         }
     }
 
-    function insertAsFirst(
+    function update(
         OfferBook storage book,
-        uint256 newId,
-        uint256 nextId
-    ) private {
-        book.firstId = newId;
-        book.offer[newId].nextId = nextId;
-        if (nextId != 0) {
-            book.offer[nextId].prevId = newId;
-        }
-    }
-
-    function insertBetween(
-        OfferBook storage book,
-        uint256 newId,
-        uint256 prevId,
-        uint256 nextId
-    ) private {
-        if (nextId != 0) {
-            book.offer[nextId].prevId = newId;
-        }
-        book.offer[newId].nextId = nextId;
-        book.offer[newId].prevId = prevId;
-        book.offer[prevId].nextId = newId;
+        Offer memory offer,
+        uint256 id
+    ) internal {
+        book.remove(id);
+        book.insert(offer.amount, offer.valueToLoan, offer.supplier);
     }
 }

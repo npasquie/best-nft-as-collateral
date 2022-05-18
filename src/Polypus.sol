@@ -3,17 +3,19 @@ pragma solidity 0.8.13;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-import "./Storage.sol";
-import "./OfferBookLib.sol";
+import "./Storage/Storage.sol";
+import "./OfferBookLib/OfferBookLib.sol";
 import "./WadRayMath.sol";
+import "./UserInteractionLogic/BorrowLogic.sol";
 
 /// @notice all entry points of the Polypus protocol
-contract Polypus is Storage, Ownable {
+contract Polypus is Storage, Ownable, BorrowLogic {
     using OfferBookLib for OfferBook;
     using WadRayMath for Ray;
     using WadRayMath for uint256;
 
     /// ADMIN ///
+
     function createMarket(IERC721 asset) external onlyOwner {
         bookOf[asset].isActive = true;
     }
@@ -52,7 +54,7 @@ contract Polypus is Storage, Ownable {
 
     function borrow(IERC721 asset, uint256[] calldata tokenIds)
         external
-        returns (uint256 borrowedAmount)
+        returns (uint256)
     {
         OfferBook storage book = bookOf[asset];
 
@@ -60,37 +62,21 @@ contract Polypus is Storage, Ownable {
             revert unavailableMarket();
         }
 
-        uint256 cursor = book.firstId;
-        uint256 cursorAmount;
-        uint256 cursorValueToLoan;
-        address cursorSupplier;
-        Ray memory collateralToMatch = Ray({ray: tokenIds.length * RAY});
-        Ray memory offerValueInAsset;
+        BorrowVars memory vars;
+        vars.collateralToMatch = Ray({ray: tokenIds.length * RAY});
 
         do {
-            cursorAmount = book.offer[cursor].amount;
-            cursorValueToLoan = book.offer[cursor].valueToLoan;
-            offerValueInAsset = cursorValueToLoan.divToRay(cursorAmount);
-            if (collateralToMatch.lt(offerValueInAsset)) {
-                // loops stops after this block
-                uint256 amountTakenFromOffer = offerValueInAsset.mulByWad(
-                    cursorAmount
-                );
-                borrowedAmount += amountTakenFromOffer;
-                cursorSupplier = book.offer[cursor].supplier;
-                book.remove(cursor);
-                book.insert(
-                    cursorAmount - amountTakenFromOffer,
-                    cursorValueToLoan,
-                    cursorSupplier
-                );
-                collateralToMatch.ray = 0;
+            vars = updateVars(book, vars);
+            if (vars.collateralToMatch.gte(vars.offerValueInAsset)) {
+                book.remove(vars.cursorId);
+                vars.collateralToMatch.ray -= vars.offerValueInAsset.ray;
+                vars.borrowedAmount += vars.cursor.amount;
             } else {
-                book.remove(cursor);
-                collateralToMatch.ray -= offerValueInAsset.ray;
-                borrowedAmount += cursorAmount;
+                // entering this block ends the while loop
+                vars = matchAndUpdateOffer(book, vars);
             }
-        } while (collateralToMatch.ray > 0);
-        payable(msg.sender).transfer(borrowedAmount);
+        } while (vars.collateralToMatch.ray > 0);
+        payable(msg.sender).transfer(vars.borrowedAmount);
+        return vars.borrowedAmount;
     }
 }

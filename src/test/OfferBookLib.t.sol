@@ -4,8 +4,8 @@ pragma solidity 0.8.13;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "forge-std/Test.sol";
 
-import "../OfferBookLib.sol";
-import "../Storage.sol";
+import "../OfferBookLib/OfferBookLib.sol";
+import "../Storage/Storage.sol";
 
 contract MockAsset is ERC721 {
     uint256 public placeholder;
@@ -27,9 +27,9 @@ contract TestOfferBookLib is Storage, Test {
     }
 
     function testInsertInEmpty(uint256 amount, uint256 valueToLoan) public {
-        fvm.assume(valueToLoan > 0);
+        fvm.assume(valueToLoan > 0 && amount > 0);
         OfferBook storage book = bookOf[asset];
-        book.insert(amount, valueToLoan);
+        book.insert(amount, valueToLoan, address(0));
         require(book.offer[book.firstId].amount == amount, "amount");
         require(
             book.offer[book.firstId].valueToLoan == valueToLoan,
@@ -46,11 +46,11 @@ contract TestOfferBookLib is Storage, Test {
 
         OfferBook storage book = bookOf[asset];
 
-        book.insert(124, 235);
-        book.insert(342, 345);
-        book.insert(564, 43);
-        book.insert(23, 65);
-        book.insert(564, 23);
+        book.insert(124, 235, address(1));
+        book.insert(342, 345, address(2));
+        book.insert(564, 43, address(3));
+        book.insert(23, 65, address(4));
+        book.insert(564, 23, address(5));
 
         cursor = book.firstId;
 
@@ -67,3 +67,5 @@ contract TestOfferBookLib is Storage, Test {
         }
     }
 }
+
+// todo : need more tests

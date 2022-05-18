@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.13;
 
-import "./Storage.sol";
+import "./Storage/Storage.sol";
 
 library WadRayMath {
     function mul(Ray memory a, Ray memory b)
@@ -25,8 +25,14 @@ library WadRayMath {
         return (a.ray * b) / RAY;
     }
 
+    /// @notice is `a` less than `b`
     function lt(Ray memory a, Ray memory b) internal pure returns (bool) {
         return a.ray < b.ray;
+    }
+
+    /// @notice is `a` greater or equal to `b`
+    function gte(Ray memory a, Ray memory b) internal pure returns (bool) {
+        return a.ray >= b.ray;
     }
 
     function divWadByRay(uint256 a, Ray memory b)
