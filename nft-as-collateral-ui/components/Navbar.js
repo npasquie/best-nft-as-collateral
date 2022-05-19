@@ -1,16 +1,18 @@
-import logo from "../public/Frame 9.svg";
+import logo from "../public/Frame31.svg";
 import Image from "next/image";
 import Link from "next/link"
 import { ConnectButton } from "web3uikit";
 import { useState } from "react";
-const myLoader = ({ src }) => {
-  return `${src}`;
+const myLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
 };
 
 const Navbar = () => {
   const [show, setshow] = useState(false)
   return (
-    <nav className="bg-blue flex h-auto items-center justify-between flex-wrap">
+    <nav className="bg-blue-900 flex h-auto items-center justify-between flex-wrap">
+      <div>
+
       <a href="#/" className=" items-center inline-flex text-dark ">
         <Image
           className=" block  w-auto object-cover"
@@ -19,9 +21,10 @@ const Navbar = () => {
           src={logo}
           height={150}
           width={200}
-        />
+          />
        
       </a>
+          </div>
       <div className="lg:hidden">
         <button 
         className=" items-center inline-flex text-white bg-yellow-100 p-3 mr-10 rounded hover:bg-yellow-200 hover:border-yellow-200"
@@ -42,25 +45,25 @@ const Navbar = () => {
       show ?
               "top-nav w-full block flex-grow flex-end lg:inline-flex lg:flex-grow lg:items-center lg:w-auto" 
               : 
-              "top-nav w-full hidden flex-grow flex-end lg:inline-flex lg:flex-grow lg:items-center lg:w-auto"}
+              "top-nav hidden flex-grow flex-end lg:inline-flex lg:flex-grow lg:items-center lg:w-auto"}
               id="navigation"
     >
-    <div className="text-xl flex flex-col items-center lg:flex-row lg:inline-flex lg:ml-auto text-white">
+    <div className="text-xl flex flex-col items-center lg:flex-row lg:flex lg:ml-auto text-white">
         <Link
-        href="#/"
+        href="/"
         passHref>
             <a  
             onClick={()=> {setshow(!show)}}
-            className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue hover:bg-yellow-200">
+            className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100">
                 Home
             </a>
         </Link>
         <Link
-        href="#/dashbord"
+        href="/Dashbord"
         passHref>
             <a  
             onClick={()=> {setshow(!show)}}
-            className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue hover:bg-yellow-200">
+            className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100">
                 Dashboard
             </a>
         </Link>
@@ -69,8 +72,8 @@ const Navbar = () => {
         passHref>
             <a  
              onClick={()=> {setshow(!show)}}
-             className="p-4 lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue hover:bg-yellow-200">
-            Pools
+             className="p-4 lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100">
+            Auction
             </a>
         </Link>
         <Link
@@ -78,11 +81,13 @@ const Navbar = () => {
         passHref>
             <a 
             onClick={()=> {setshow(!show)}}
-            className="p-4 lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue hover:bg-yellow-200">
+            className="p-4 lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100">
             Docs
             </a>
         </Link>
+    <div>
     <ConnectButton />
+    </div>
     </div>
     </div>
    

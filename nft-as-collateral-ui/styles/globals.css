@@ -3,13 +3,13 @@
 @tailwind utilities;
 @layer components {
     #__next {
-        @apply h-full bg-blue;
+        @apply h-full bg-blue-900;
     }
     html,
     body {
-        @apply h-full bg-blue;
+        @apply h-full bg-blue-900;
     }
     footer {
-      @apply h-full bg-blue;
+      @apply h-full bg-blue-900;
      }
 }

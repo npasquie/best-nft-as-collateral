@@ -17,13 +17,7 @@ export default class MyDocument extends  Document {
       const initialProps = await Document.getInitialProps(ctx)
       return {
         
-      //   <Html>
-      //   <Head />
-      //   <body className='bg-blue'>
-      //     <Main />
-      //     <NextScript />
-      //   </body>
-      // </Html>
+    
       
         ...initialProps,
         styles: (

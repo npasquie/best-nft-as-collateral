@@ -1,17 +1,20 @@
 import PoolCard from "./PoolCard";
-import loan from "../../public/vectordesign (5).svg";
-import borrow from "../../public/vectordesign (6).svg";
+import loan from "../../public/vectordesign1.svg";
+import borrow from "../../public/vectordesign2.svg";
+import NftImage from "../../public/images/image2.svg"
 
 export const cardData = [
   {
     id: "borrow",
     name: "borrow",
     src: borrow,
+    alt:'borrow'
   },
   {
-    id: "lown",
-    name: "loan",
-    src: loan,
+    id: "loan",
+    name:"loan",
+    src: NftImage,
+    alt:"loan"
   },
 ];
 
@@ -21,20 +24,24 @@ const Pool = ({ myLoader }) => {
       <div className="text-center">
         <h1 className="text-white text-6xl m-4">Welcome</h1>
       </div>
-      <div className=" flex lg:flex-row flex-col  justify-around">
-        {cardData.map((item) => {
-            return (
+      <div className=" flex-columns m-auto lg:flex w-full   lg:justify-between">
 
-                <PoolCard
-                  myLoader={myLoader}
-                  key={item.id}
-                  name={item.name}
-                  src={item.src}
-                />
+        
+        {cardData.map((item) => {
+          const {id, name, src, alt} = item
+          return (
+            <PoolCard
+            myLoader={myLoader}
+            key={id}
+            name={name}
+            src={src}
+            alt={alt}
+            />
             )
-})}
+          })}
+          </div>
       </div>
-    </div>
+    
   );
 };
 

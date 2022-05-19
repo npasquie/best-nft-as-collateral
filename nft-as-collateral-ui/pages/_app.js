@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { MoralisProvider } from "react-moralis";
 import { NotificationProvider } from "web3uikit";
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import Layout from "../components/Layout";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -23,7 +24,9 @@ function MyApp({ Component, pageProps }) {
       <NotificationProvider>
         <GlobalStyle />
         <ThemeProvider theme={theme}>
+        <Layout>
         <Component {...pageProps} />
+        </Layout>
         </ThemeProvider>
       </NotificationProvider>
     </MoralisProvider>
