@@ -1,10 +1,13 @@
 {
-    "json.schemas": [
-        {
-        "css.lint.unknownAtRules": "ignore"
-
-        }
-    ],
-    "js/ts.implicitProjectConfig.strictFunctionTypes": false,
-    "js/ts.implicitProjectConfig.experimentalDecorators": true
+  "json.schemas": [
+    {
+      "css.lint.unknownAtRules": "ignore"
+    }
+  ],
+  "js/ts.implicitProjectConfig.strictFunctionTypes": false,
+  "js/ts.implicitProjectConfig.experimentalDecorators": true,
+  "editor.formatOnSave": true,
+  "solidity.formatter": "prettier",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "solidity.compileUsingRemoteVersion": "v0.8.13+commit.abaa5c0e"
 }
