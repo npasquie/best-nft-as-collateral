@@ -7,9 +7,10 @@ import "./Storage/Storage.sol";
 import "./OfferBookLib/OfferBookLib.sol";
 import "./WadRayMath.sol";
 import "./UserInteractionLogic/BorrowLogic.sol";
+import "./Lens.sol";
 
 /// @notice all entry points of the Polypus protocol
-contract Polypus is Storage, Ownable, BorrowLogic {
+contract Polypus is Storage, Ownable, BorrowLogic, Lens {
     using OfferBookLib for OfferBook;
     using WadRayMath for Ray;
     using WadRayMath for uint256;
@@ -26,27 +27,24 @@ contract Polypus is Storage, Ownable, BorrowLogic {
     /// @notice supplies to given market with given value to loan.
     /// @notice updates value to loan and adds the new liquidity.
     function supply(IERC721 asset, uint256 valueToLoan) external payable {
-        if (valueToLoan < minimumValueToLoan) {
-            revert valueOutOfRange();
-        }
-        if (!bookOf[asset].isActive) {
-            revert unavailableMarket();
-        }
+        OfferBook storage book = bookOf[asset];
+
+        supplyChecks(asset, valueToLoan);
 
         uint256 alreadySupplied;
-        uint256 prevOfferId = bookOf[asset].offerIdOf[msg.sender];
+        uint256 prevOfferId = book.offerIdOf[msg.sender];
 
         if (prevOfferId != 0) {
-            alreadySupplied = bookOf[asset].offer[prevOfferId].amount;
+            alreadySupplied = book.offer[prevOfferId].amount;
             if (msg.value + alreadySupplied < minimumDepositableValue) {
                 revert valueOutOfRange();
             }
-            bookOf[asset].remove(prevOfferId);
+            book.remove(prevOfferId);
         } else if (msg.value < minimumDepositableValue) {
             revert valueOutOfRange();
         }
 
-        bookOf[asset].offerIdOf[msg.sender] = bookOf[asset].insert(
+        book.offerIdOf[msg.sender] = book.insert(
             msg.value + alreadySupplied,
             valueToLoan,
             msg.sender
@@ -62,12 +60,14 @@ contract Polypus is Storage, Ownable, BorrowLogic {
         OfferBook storage book = bookOf[asset];
 
         performPreChecks(book, asset, tokenIds);
-
         BorrowVars memory vars;
         vars.collateralToMatch = Ray({ray: tokenIds.length * RAY});
-
         do {
             vars = updateVars(book, vars);
+            if (vars.cursorId == 0) {
+                // reached the end
+                revert notEnoughLiquidityAvailable();
+            }
             if (vars.collateralToMatch.gte(vars.offerValueInAsset)) {
                 book.remove(vars.cursorId);
                 vars.collateralToMatch.ray -= vars.offerValueInAsset.ray;
@@ -79,5 +79,17 @@ contract Polypus is Storage, Ownable, BorrowLogic {
         } while (vars.collateralToMatch.ray > 0);
         payable(msg.sender).transfer(vars.borrowedAmount);
         return vars.borrowedAmount;
+    }
+
+    /// @notice performs initial checks for the supply function
+    function supplyChecks(IERC721 asset, uint256 valueToLoan) private view {
+        OfferBook storage book = bookOf[asset];
+
+        if (valueToLoan < minimumValueToLoan) {
+            revert valueOutOfRange();
+        }
+        if (!book.isActive) {
+            revert unavailableMarket();
+        }
     }
 }
