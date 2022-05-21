@@ -15,7 +15,7 @@ library OfferBookLib {
         uint256 amount,
         uint256 valueToLoan,
         address supplier
-    ) internal returns (uint256 newId) {
+    ) external returns (uint256 newId) {
         if (amount == 0 || valueToLoan == 0) {
             revert valueOutOfRange();
         }
@@ -25,10 +25,11 @@ library OfferBookLib {
 
         newId = insertLogic(book, amount, valueToLoan);
         book.offer[newId].supplier = supplier;
+        book.available += amount;
     }
 
     /// @notice removes the offer from the book
-    function remove(OfferBook storage book, uint256 offerId) internal {
+    function remove(OfferBook storage book, uint256 offerId) external {
         if (offerId > book.numberOfOffers) {
             revert removeNonExistentOffer();
         }
@@ -50,17 +51,25 @@ library OfferBookLib {
         if (nextId != 0) {
             book.offer[nextId].prevId = prevId;
         }
+
+        book.available -= book.offer[offerId].amount;
     }
 
-    // todo : there is a smarter way to do this as the position of the offer
-    // todo :  won't change in the book if only the amount is updated
-    /// @notice remove the offer of `id` and inserts the new offer
-    function update(
+    /// @notice changes the amount of an update, considers it as a new offer
+    /// @dev as ordering depends on valueToLoan only,
+    /// @dev it doesn't need to be redone
+    function updateAmount(
         OfferBook storage book,
-        Offer memory offer,
+        uint256 newAmount,
         uint256 id
-    ) internal {
-        book.remove(id);
-        book.insert(offer.amount, offer.valueToLoan, offer.supplier);
+    ) external {
+        uint256 newId = ++book.numberOfOffers;
+
+        book.offer[newId] = book.offer[id];
+        book.offer[id].isRemoved = true;
+        book.offer[newId].amount = newAmount;
+        book.offer[book.offer[id].prevId].nextId = newId;
+        book.offer[book.offer[id].nextId].prevId = newId;
+        book.available = book.available - book.offer[id].amount + newAmount;
     }
 }

@@ -13,6 +13,7 @@ struct OfferBook {
     uint256 firstId;
     uint256 numberOfOffers;
     mapping(address => uint256) offerIdOf;
+    uint256 available;
     // mapping(address => BorrowerPosition) borrowerPositionOf;
 }
 
@@ -58,3 +59,4 @@ error removeNonExistentOffer();
 error unavailableMarket();
 error insertForExistentSupplier();
 error etherTransferFailed();
+error notEnoughLiquidityAvailable();

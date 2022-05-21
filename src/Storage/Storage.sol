@@ -33,8 +33,6 @@ abstract contract Storage {
     /// @dev asset (nft) => OfferBook
     mapping(IERC721 => OfferBook) public bookOf;
 
-    // mapping(uint )
-
     constructor() {
         minimumDepositableValue = 1 ether / 100; // 0.01
         minimumValueToLoan = 0.005 ether;
