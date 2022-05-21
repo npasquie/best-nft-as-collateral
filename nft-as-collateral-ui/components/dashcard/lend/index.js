@@ -1,21 +1,18 @@
-import DashcardLg from "./DashcardLg"
-import DashCardSm from "./DashCardSm"
+import LendCardLg from "./LendCardLg";
+import LendCardSm from "./LendCardSm";
+const LendDashCard = ({ lent }) => {
 
-
-
-
-const DashCard = ({ borrowed }) => {
 
 
     return (
         <>
             {
-                borrowed.map((item) => {
+                lent.map((item) => {
                     const { id, name, src, totalDeposit, totalBorrowed, countdown, interest } = item;
                     console.log(src);
                     return (
 
-                        <DashcardLg
+                        <LendCardLg
                             key={id}
                             id={id}
                             name={name}
@@ -29,11 +26,11 @@ const DashCard = ({ borrowed }) => {
                 })
 
             }
-            {borrowed.map((item) => {
+            {lent.map((item) => {
                 const { id, name, src, totalDeposit, totalBorrowed, countdown, interest } = item;
                 return (
 
-                    <DashCardSm
+                    <LendCardSm
                         key={id}
                         id={id}
                         name={name}
@@ -49,4 +46,4 @@ const DashCard = ({ borrowed }) => {
     )
 }
 
-export default DashCard
+export default LendDashCard

@@ -1,11 +1,11 @@
 import Image from "next/image";
-import imgSrc from "../../public/images/image2.svg";
+
 
 const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`
 };
 
-const DashcardLg = ({
+const LendCardLg = ({
     id,
     name,
     src,
@@ -17,7 +17,7 @@ const DashcardLg = ({
     return (
         <div className="container hidden xl:block w-auto xl:max-w-1/2 m-5 p-5 mx-auto rounded-xl bg-blue-700">
             <div className="flex flex-start p-5">
-                <h3 className="text-3xl text-white text-center">Borrowed</h3>
+                <h3 className="text-3xl text-white text-center">Lent</h3>
             </div>
             <div className="container flex bg-blue-600 rounded-xl  items-center justify-between p-5">
                 <div className="inline-flex items-center  flex-wrap">
@@ -69,4 +69,4 @@ const DashcardLg = ({
     );
 };
 
-export default DashcardLg;
+export default LendCardLg;
