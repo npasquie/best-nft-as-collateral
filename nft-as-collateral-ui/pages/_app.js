@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import { MoralisProvider } from "react-moralis";
 import { NotificationProvider } from "web3uikit";
+import { useRouter } from "next/router";
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import Layout from "../components/Layout";
 
@@ -19,14 +20,15 @@ const theme = {
 }
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
   return (
     <MoralisProvider initializeOnMount={false}>
       <NotificationProvider>
         <GlobalStyle />
         <ThemeProvider theme={theme}>
-        <Layout>
-        <Component {...pageProps} />
-        </Layout>
+          <Layout>
+            <Component {...pageProps} key={router.asPath} />
+          </Layout>
         </ThemeProvider>
       </NotificationProvider>
     </MoralisProvider>
