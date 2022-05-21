@@ -69,7 +69,7 @@ abstract contract BorrowLogic is ERC721Holder {
             cursor: newCursor,
             cursorId: book.firstId,
             collateralToMatch: vars.collateralToMatch,
-            offerValueInAsset: newCursor.valueToLoan.divToRay(newCursor.amount),
+            offerValueInAsset: newCursor.amount.divToRay(newCursor.valueToLoan),
             borrowedAmount: vars.borrowedAmount
         });
         return newVars;

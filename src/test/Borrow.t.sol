@@ -5,6 +5,8 @@ import "./Base.sol";
 
 /// @notice test suite for the borrow user-facing method
 contract TestBorrow is Base {
+    fallback() external payable {}
+
     function testBorrow() public {
         fvm.deal(address(this), 2 ether);
         plp.supply{value: 2 ether}(mockNft, 1 ether);
