@@ -14,8 +14,7 @@ function insertLogic(
 ) returns (uint256 newId) {
     uint256 firstId = book.firstId;
     uint256 cursor = firstId;
-    book.numberOfOffers++; // id 0 is reserved to null
-    newId = book.numberOfOffers;
+    newId = ++book.numberOfOffers; // id 0 is reserved to null
     book.offer[newId].amount = amount;
     book.offer[newId].valueToLoan = valueToLoan;
     uint256 prevId = cursor;

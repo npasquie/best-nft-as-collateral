@@ -33,7 +33,7 @@ abstract contract BorrowLogic is ERC721Holder {
         );
         finalVars.borrowedAmount = vars.borrowedAmount + amountTakenFromOffer;
         finalVars.cursor.amount = vars.cursor.amount - amountTakenFromOffer;
-        book.update(finalVars.cursor, vars.cursorId);
+        book.updateAmount(finalVars.cursor.amount, vars.cursorId);
         finalVars.collateralToMatch.ray = 0;
     }
 
@@ -64,12 +64,12 @@ abstract contract BorrowLogic is ERC721Holder {
         view
         returns (BorrowVars memory)
     {
-        Offer memory newCursor = book.offer[vars.cursorId];
+        Offer memory newCursor = book.offer[book.firstId];
         BorrowVars memory newVars = BorrowVars({
             cursor: newCursor,
             cursorId: book.firstId,
             collateralToMatch: vars.collateralToMatch,
-            offerValueInAsset: newCursor.valueToLoan.divToRay(newCursor.amount),
+            offerValueInAsset: newCursor.amount.divToRay(newCursor.valueToLoan),
             borrowedAmount: vars.borrowedAmount
         });
         return newVars;
