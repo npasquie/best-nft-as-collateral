@@ -1,12 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+pragma solidity 0.8.14;
 
-import "../Storage/Storage.sol";
 import "./InsertLogic.sol";
 
 library OfferBookLib {
-    using OfferBookLib for OfferBook;
-
     /// @return newId the id of the newly created offer
     /// @dev amount and valueToLoan must have been checked before calling
     /// @dev amount and valueToLoan must both be above 0

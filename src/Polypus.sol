@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+pragma solidity 0.8.14;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-import "./Storage/Storage.sol";
-import "./OfferBookLib/OfferBookLib.sol";
 import "./WadRayMath.sol";
 import "./UserInteractionLogic/BorrowLogic.sol";
 import "./Lens.sol";
@@ -77,12 +75,12 @@ contract Polypus is Storage, Ownable, BorrowLogic, Lens {
                 vars = matchAndUpdateOffer(book, vars);
             }
         } while (vars.collateralToMatch.ray > 0);
-        payable(msg.sender).transfer(vars.borrowedAmount);
+        sendEth(vars.borrowedAmount);
         return vars.borrowedAmount;
     }
 
     /// @notice performs initial checks for the supply function
-    function supplyChecks(IERC721 asset, uint256 valueToLoan) private view {
+    function supplyChecks(IERC721 asset, uint256 valueToLoan) private {
         OfferBook storage book = bookOf[asset];
 
         if (valueToLoan < minimumValueToLoan) {
@@ -91,5 +89,7 @@ contract Polypus is Storage, Ownable, BorrowLogic, Lens {
         if (!book.isActive) {
             revert unavailableMarket();
         }
+
+        // CETH.mint{value: msg.value}();
     }
 }
