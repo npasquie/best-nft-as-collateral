@@ -6,7 +6,7 @@ const withImages = require('next-images')
 const nextConfig = withImages({
   reactStrictMode: true,
   trailingSlash: true,
-  basePath: '/ipfs.io/ipfs',
+  // basePath: '/ipfs.io/ipfs',
   exportPathMap: function () {
     return {
       '/': { page: '/' }
