@@ -21,6 +21,7 @@ const theme = {
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+  console.log(router.basePath)
   return (
     <MoralisProvider initializeOnMount={false}>
       <NotificationProvider>
