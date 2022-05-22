@@ -3,9 +3,9 @@ src = 'src'
 out = 'out'
 libs = ['lib']
 
-libraries = [
-    "src/OfferBookLib/OfferBookLib.sol:OfferBookLib:0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
-    "src/WadRayMath.sol:WadRayMath:0x5fbdb2315678afecb367f032d93f642f64180aa3"
-]
+# libraries = [
+#     "src/OfferBookLib/OfferBookLib.sol:OfferBookLib:0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
+#     "src/WadRayMath.sol:WadRayMath:0x5fbdb2315678afecb367f032d93f642f64180aa3"
+# ]
 
 # See more config options https://github.com/gakonst/foundry/tree/master/config

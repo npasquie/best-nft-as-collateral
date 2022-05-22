@@ -60,7 +60,12 @@ abstract contract BorrowLogic is ERC721Holder, Config {
 
     /// @notice sends ETH to caller that is sitting in compound
     function sendEth(uint256 amount) internal {
-        CETH.redeemUnderlying(amount);
+        /// ETHEREUM ///
+        // CETH.redeemUnderlying(amount);
+
+        /// POLYGON ///
+        AAVE_LENDING_POOL.withdraw(address(WETH), amount, address(this));
+        WETH.withdraw(amount);
         payable(msg.sender).transfer(amount);
     }
 
