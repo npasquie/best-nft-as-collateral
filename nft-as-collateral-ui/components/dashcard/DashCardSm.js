@@ -1,9 +1,14 @@
 import Image from "next/image";
+import Repay from "../modal/repay";
+import { useState } from "react";
 
 const myLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`
 };
 const DashCardSm = ({ id, name, src, totalDeposit, totalBorrowed, countdown, interest }) => {
+
+  const [modalOn, setmodalOn] = useState(false);
+  const [choice, setChoice] = useState(false);
 
   return (
     <div className="flex w-4/5 xl:hidden flex-col   rounded-lg shadow-lg ml-auto p-8 m-2 bg-blue-600 ">
@@ -16,8 +21,16 @@ const DashCardSm = ({ id, name, src, totalDeposit, totalBorrowed, countdown, int
         <p>Total borrowed: <span>{totalBorrowed}</span></p>
         <p>Countdown: <span>{countdown}</span></p>
         <p>Interest: <span>{interest}</span></p>
-        <button type="button" className=" inline-block w-full m-auto px-6 py-2.5 bg-yellow-100 text-blue font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Repay</button>
+        <button
+          type="button"
+          onClick={() => setmodalOn(!modalOn)}
+          className=" inline-block w-full m-auto px-6 py-2.5 bg-yellow-100 text-blue font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModal">Repay</button>
       </div>
+      {
+        modalOn &&
+
+        <Repay />
+      }
     </div>
   )
 }

@@ -1,5 +1,7 @@
 import Image from "next/image";
+import { useState } from "react";
 import imgSrc from "../../public/images/image2.svg";
+import Repay from "../modal/repay";
 
 const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`
@@ -14,8 +16,10 @@ const DashcardLg = ({
     countdown,
     interest,
 }) => {
+    const [modalOn, setmodalOn] = useState(false);
+    const [choice, setChoice] = useState(false)
     return (
-        <div className="container hidden xl:block w-auto xl:max-w-1/2 m-5 p-5 mx-auto rounded-xl bg-blue-700">
+        <div className="container relative hidden xl:block w-auto xl:max-w-1/2 m-5 p-5 mx-auto rounded-xl bg-blue-700">
             <div className="flex flex-start p-5">
                 <h3 className="text-3xl text-white text-center">Borrowed</h3>
             </div>
@@ -60,11 +64,13 @@ const DashcardLg = ({
                 </div>
                 <button
                     type="button"
-                    className="inline-block px-6 py-2.5 mx-5 text-xl font-semibold text-blue-900 rounded leading-tight bg-yellow-100"
+                    onClick={() => setmodalOn(!modalOn)}
+                    className="inline-block px-6 py-2.5 mx-5 text-xl font-semibold text-blue-900 rounded leading-tight bg-yellow-100" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 >
                     Repay
                 </button>
             </div>
+            {modalOn && <Repay />}
         </div>
     );
 };

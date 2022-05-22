@@ -59,6 +59,7 @@ const LendCardLg = ({
                     </div>
                 </div>
                 <button
+
                     type="button"
                     className="inline-block px-6 py-2.5 mx-5 text-xl font-semibold text-blue-900 rounded leading-tight bg-yellow-100"
                 >
