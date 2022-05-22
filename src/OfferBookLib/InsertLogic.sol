@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+pragma solidity 0.8.14;
 
-import "../Storage/Storage.sol";
+import "../Storage/Types.sol";
 
 // compiler doesn't allow visibility on free functions
 /* solhint-disable func-visibility */

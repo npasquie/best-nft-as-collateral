@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+pragma solidity 0.8.14;
+
+import "../Config.sol";
 
 uint256 constant RAY = 1e27;
 uint256 constant WAD = 1 ether;
@@ -26,25 +28,6 @@ struct Offer {
     uint256 prevId;
     address supplier;
 }
-
-// struct BorrowerPosition {
-//     mapping(uint256 => bool) hasProvidedToken;
-//     mapping(uint256 => uint256) dateOfProvidingToken;
-//     uint256 nbOfTokensProvided;
-// }
-
-// struct Loan {
-//     address borrower;
-//     uint256[] tokenIds;
-//     IERC721 market;
-//     uint256 date;
-//     uint256 amount;
-//     uint256 amountSold;
-// }
-
-// struct SupplierClaims {
-
-// }
 
 /// @notice 27-decimals fixed-point number
 /// @dev this struct must be used systematically to avoid confusions
