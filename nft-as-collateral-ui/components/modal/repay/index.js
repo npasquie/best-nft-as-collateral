@@ -6,7 +6,7 @@ const myLoader = ({ src, width, quality }) => {
 };
 
 
-const Repay = (params) => {
+const Repay = ({ modalOn2, setmodalOn2, modalOn, setmodalOn }) => {
     return (
         <div
             className="modal fade absolute inset-x-0 -top-4  flex w-full justify-center items-center h-auto outline-none overflow-x-hidden overflow-y-auto"
@@ -15,7 +15,7 @@ const Repay = (params) => {
             aria-labelledby="exampleModalLabel"
             aria-hidden="false"
         >
-            <div className="modal-dialog d-flex content-center rounded-3xl items-center w-3/4 relative  pointer-events-none">
+            <div className="modal-dialog d-flex content-center rounded-4xl items-center w-3/4 relative  pointer-events-none">
                 <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-blue-800 bg-clip-padding rounded-md outline-none text-current">
                     <div className="modal-header flex flex-shrink-0 items-center justify-between p-4  rounded-xl">
                         <h5 className="text-3xl font-medium leading-normal text-white mx-2">Borrowed</h5>
@@ -62,6 +62,13 @@ const Repay = (params) => {
                     </div>
                     <div className="modal-footer flex flex-shrink-0 flex-wrap content-center items-center justify-end p-5  ">
                         <button
+                            onClick={() => {
+                                setmodalOn2(!modalOn2)
+                                setmodalOn(!modalOn)
+                                setTimeout(() => {
+                                    setmodalOn2(false)
+                                }, 2000);
+                            }}
                             type="button"
                             className="px-3
                         py-2.5
@@ -86,7 +93,6 @@ const Repay = (params) => {
                         >
                             Repay
                         </button>
-                        <button type="button" className="px-6"></button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import imgSrc from "../../public/images/image2.svg";
+import Confirm from "../modal/confirm";
 import Repay from "../modal/repay";
 
 const myLoader = ({ src, width, quality }) => {
@@ -17,7 +18,12 @@ const DashcardLg = ({
     interest,
 }) => {
     const [modalOn, setmodalOn] = useState(false);
+    const [modalOn2, setmodalOn2] = useState(false);
     const [choice, setChoice] = useState(false)
+
+
+
+
     return (
         <div className="container relative hidden xl:block w-auto xl:max-w-1/2 m-5 p-5 mx-auto rounded-xl bg-blue-700">
             <div className="flex flex-start p-5">
@@ -70,7 +76,14 @@ const DashcardLg = ({
                     Repay
                 </button>
             </div>
-            {modalOn && <Repay />}
+            {
+                modalOn && <Repay setmodalOn={setmodalOn} modalOn={modalOn} setmodalOn2={setmodalOn2} modalOn2={modalOn2} />
+
+            }
+            {
+                modalOn2 && <Confirm />
+
+            }
         </div>
     );
 };

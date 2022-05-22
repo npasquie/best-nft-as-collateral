@@ -6,7 +6,7 @@ const myLoader = ({ src, width, quality }) => {
 const LendCardSm = ({ id, name, src, totalDeposit, totalBorrowed, countdown, interest }) => {
 
     return (
-        <div className="flex w-4/5 xl:hidden flex-col   rounded-lg shadow-lg ml-auto p-8 m-2 bg-blue-600 ">
+        <div className="flex w-4/5 xl:hidden flex-col   rounded-lg shadow-lg m-auto p-8 bg-blue-600 ">
             <h5 className="text-gray-900 text-xl font-medium p-3 mb-2">Lent</h5>
             <a href="/" data-mdb-ripple="true" data-mdb-ripple-color="light">
                 <Image className="rounded-xl object-fill" src={src} layout="responsive" width={500} height={500} alt={name} loader={myLoader} />
