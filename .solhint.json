@@ -5,7 +5,7 @@
     "function-max-lines": ["error", 25],
     "code-complexity": ["warn", 7],
     "ordering": "error",
-    "compiler-version": ["error", "0.8.13"],
+    "compiler-version": ["error", "0.8.14"],
     "func-visibility": ["error", { "ignoreConstructors": true }]
   }
 }

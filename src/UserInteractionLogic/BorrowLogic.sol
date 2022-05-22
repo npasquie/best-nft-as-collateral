@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+pragma solidity 0.8.14;
 
 import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 
@@ -17,7 +17,7 @@ struct BorrowVars {
 }
 
 /// @notice internal bits of logic for the borrow user interaction
-abstract contract BorrowLogic is ERC721Holder {
+abstract contract BorrowLogic is ERC721Holder, Config {
     using WadRayMath for uint256;
     using WadRayMath for Ray;
     using OfferBookLib for OfferBook;
@@ -56,6 +56,17 @@ abstract contract BorrowLogic is ERC721Holder {
         }
 
         takeAssets(asset, tokenIds);
+    }
+
+    /// @notice sends ETH to caller that is sitting in compound
+    function sendEth(uint256 amount) internal {
+        /// ETHEREUM ///
+        // CETH.redeemUnderlying(amount);
+
+        /// POLYGON ///
+        AAVE_LENDING_POOL.withdraw(address(WETH), amount, address(this));
+        WETH.withdraw(amount);
+        payable(msg.sender).transfer(amount);
     }
 
     /// @notice update borrowVars with the new best offer available
