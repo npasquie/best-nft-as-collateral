@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useMoralis, useWeb3Contract } from "react-moralis";
 import { contractAddress } from "../../../constants";
 import { useState } from "react";
 const myLoader = ({ src, width, quality }) => {

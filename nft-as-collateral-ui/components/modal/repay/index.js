@@ -1,12 +1,38 @@
 import { ImCross } from "react-icons/im";
 import imgSrc from "../../../public/images/image2.svg";
 import Image from "next/image";
-import { useState } from "react";
+import { ethers } from "ethers";
+import { useContractFunction } from "@usedapp/core";
+import { useState, useEffect } from "react";
 const myLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`;
 };
+const abi = [
+  {
+    inputs: [],
+    name: "sjdhkashdkjahsdk",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+const contrAddr = "0xCFFEd41D217d1855114cD9b2362C1279AAA90b74";
 
-const Repay = ({ modalOn2, setmodalOn2, modalOn, setmodalOn }) => {
+const Repay = ({ setRepaid, modalOn2, setmodalOn2, modalOn, setmodalOn }) => {
+  const interf = new ethers.utils.Interface(abi);
+  const contract = new ethers.Contract(contrAddr, interf);
+  const tx = useContractFunction(contract, "sjdhkashdkjahsdk");
+  useEffect(() => {
+    if (tx.state.status == "PendingSignature") {
+      setmodalOn2(true);
+    }
+    if (tx.state.status == "Success") {
+      setmodalOn2(false);
+      setmodalOn(false);
+      setRepaid(true);
+    }
+  });
+
   return (
     <div
       className="modal fade absolute inset-x-0 -top-4  flex w-full justify-center items-center h-auto outline-none overflow-x-hidden overflow-y-auto"
@@ -19,7 +45,7 @@ const Repay = ({ modalOn2, setmodalOn2, modalOn, setmodalOn }) => {
         <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-blue-800 bg-clip-padding rounded-md outline-none text-current z-10">
           <div className="modal-header flex flex-shrink-0 items-center justify-between p-4  rounded-xl">
             <h5 className="text-3xl font-medium leading-normal text-white mx-2">
-              Borrowed
+              Repaying
             </h5>
             <button
               onClick={() => setmodalOn(!modalOn)}
@@ -47,18 +73,12 @@ const Repay = ({ modalOn2, setmodalOn2, modalOn, setmodalOn }) => {
                 </div>
                 <div className="p-5 text-white">
                   <p>
-                    <span>name : #</span>id
-                  </p>
-                </div>
-
-                <div className="p-5 text-white">
-                  <p>
-                    Countdown: <span>countdown</span>
+                    <span>You get back : Bored Ape 1231</span>
                   </p>
                 </div>
                 <div className="p-5 text-white">
                   <p>
-                    To refund: <span>interest$</span>
+                    <span>You repay : 78.75 ETH</span>
                   </p>
                 </div>
               </div>
@@ -67,11 +87,7 @@ const Repay = ({ modalOn2, setmodalOn2, modalOn, setmodalOn }) => {
           <div className="modal-footer flex flex-shrink-0 flex-wrap content-center items-center justify-end p-5  ">
             <button
               onClick={() => {
-                setmodalOn2(!modalOn2);
-                setmodalOn(!modalOn);
-                setTimeout(() => {
-                  setmodalOn2(false);
-                }, 2000);
+                tx.send();
               }}
               type="button"
               className="px-3

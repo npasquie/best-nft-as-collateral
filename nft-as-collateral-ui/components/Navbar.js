@@ -1,13 +1,16 @@
 import logo from "../public/Frame31.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { ConnectButton } from "web3uikit";
+import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import { useEthers } from "@usedapp/core";
+
 const myLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`;
 };
 
 const Navbar = () => {
+  const { activateBrowserWallet, account } = useEthers();
   const [show, setshow] = useState(false);
   return (
     <nav className="bg-blue-900 flex h-auto items-center justify-between flex-wrap">
@@ -90,7 +93,19 @@ const Navbar = () => {
             </a>
           </Link>
           <div>
-            <ConnectButton />
+            <Button
+              onClick={() => {
+                activateBrowserWallet();
+              }}
+              className="p-4 lg:inline-flex lg:w-auto px-3 py-2 rounded text-white text-blue-900 bg-yellow-100"
+              style={{
+                marginRight: "2em",
+                marginLeft: "2em",
+              }}
+            >
+              {account && <>tobou.eth</>}
+              {!account && <>Connect Wallet</>}
+            </Button>
           </div>
         </div>
       </div>
