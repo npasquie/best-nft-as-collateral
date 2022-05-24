@@ -8,6 +8,7 @@ const nextConfig = withImages({
   trailingSlash: true,
   exportPathMap: function () {
     return {
+      "/": { page: "/" },
       "/Dashboard": { page: "/Dashboard" },
       // "/Auction": { page: "/Auction" },
       // "/Market": { page: "/Market" },
