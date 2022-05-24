@@ -11,13 +11,13 @@ const PoolCard = ({
   LTV,
 }) => {
   return (
-    <div className="flex flex-col  lg:w-3/5  rounded-lg shadow-lg m-7 p-5 bg-blue-700 ">
-      <div className="container">
-        <h5 className="text-white text-xl font-medium mb-2">{name}</h5>
+    <div className="flex flex-col  lg:w-3/5  rounded-lg shadow-lg m-4 p-3 bg-blue-700 ">
+      <div className="container p-3">
+        <h5 className="text-white text-xl font-medium m-2">{name}</h5>
       </div>
       <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
         <Image
-          className="rounded-t-lg "
+          className="rounded-lg"
           src={image}
           layout="responsive"
           width={800}
@@ -26,7 +26,7 @@ const PoolCard = ({
           loader={myLoader}
         />
       </a>
-      <div className="flex flex-col p-10 justify-start content-between">
+      <div className="flex flex-col p-3 justify-start content-between">
         <div className="flex content-between">
           <div className="container w-full">
             <span class="text-xs inline-block m-2 m-w-1/3 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full">

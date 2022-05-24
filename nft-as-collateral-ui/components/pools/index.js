@@ -5,11 +5,8 @@ import NftImage from "../../public/images/image2.svg";
 
 const Pool = ({ myLoader, marketData }) => {
   return (
-    <div className="container">
-      <div className="text-center">
-        <h1 className="text-white text-6xl m-4"> Available Collection</h1>
-      </div>
-      <div className=" flex-columns m-auto lg:flex w-full   lg:justify-between">
+    <div className="container m-auto">
+      <div className=" flex-columns m-auto lg:flex w-full  lg:justify-between">
         {marketData.map((item) => {
           const { id, name, image, alt, liquity, wpy, loanDuration, LTV } =
             item;

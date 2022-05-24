@@ -54,6 +54,12 @@ const Markets = () => {
   return (
     <div className="section">
       <div className="container bg-blue-600">
+        <div className="text-start">
+          <h1 className="text-white p-3 text-6xl mx-5">
+            {" "}
+            Available Collection
+          </h1>
+        </div>
         <div className="grid grid-row-2 lg:grid-cols-3">
           <div className="container w-full">
             <Pool myLoader={myLoader} marketData={marketData} />
