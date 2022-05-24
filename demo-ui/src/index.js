@@ -4,10 +4,21 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import { ChainId, DAppProvider, useEthers } from "@usedapp/core";
+
+const config = {
+  readOnlyChain: [ChainId.ArbitrumRinkeby],
+  readOnlyUrls: {
+    [ChainId.ArbitrumRinkeby]: "https://rinkeby.arbitrum.io/rpc",
+  },
+};
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <DAppProvider config={config}>
+      <App />
+    </DAppProvider>
   </React.StrictMode>
 );
 
