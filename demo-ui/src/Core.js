@@ -155,7 +155,7 @@ function Core({ page }) {
               </Card>
             </>
           )}
-          {borrow.state.status == "Exception" && (
+          {borrow.state.status == "Success" && (
             <Card
               style={{
                 backgroundColor: "#0A123E",
