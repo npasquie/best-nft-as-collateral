@@ -56,12 +56,12 @@ const DashcardLg = ({
             </div>
             <div className="p-5 text-xl font-medium text-white">
               <p>
-                Total borrowed: <span>{totalBorrowed}$</span>
+                Total borrowed: <span>{totalBorrowed}</span>
               </p>
             </div>
             <div className="p-5 text-xl font-medium text-white">
               <p>
-                Total borrowed: <span>{totalBorrowed}$</span>
+                Total borrowed: <span>{totalBorrowed}</span>
               </p>
             </div>
             <div className="p-5 text-xl font-medium text-white">
@@ -71,7 +71,7 @@ const DashcardLg = ({
             </div>
             <div className="p-5 text-xl font-medium text-white">
               <p>
-                Interest: <span>{interest}$</span>
+                Interest: <span>{interest}</span>
               </p>
             </div>
           </div>
