@@ -1,6 +1,6 @@
 import { ImSpinner10 } from "react-icons/im";
 
-const Confirm = () => {
+const Deposit = () => {
   return (
     <div
       className="modal fade absolute inset-x-0 -top-4  flex w-full justify-center items-center h-auto outline-none overflow-x-hidden overflow-y-auto z-10"
@@ -28,7 +28,7 @@ const Confirm = () => {
             <div className="container flex bg-blue-600 rounded-xl  items-center justify-center p-5">
               <div className="flex-column items-center flex-center p-5 rounded flex-wrap">
                 <div className="p-5 text-white text-xl text-center">
-                  <p>Claiming back your NFT.</p>
+                  <p>Deposit 60 Eth</p>
                 </div>
                 <div className="p-5 text-xl font-semibold  text-white text-center">
                   <p>Confirm transaction in your wallet.</p>
@@ -42,4 +42,4 @@ const Confirm = () => {
   );
 };
 
-export default Confirm;
+export default Deposit;

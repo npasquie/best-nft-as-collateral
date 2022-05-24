@@ -50,7 +50,12 @@ const Dashbord = () => {
   return (
     <div className="section">
       <div className="container p-5">
-        <DashCard borrowed={borrowed} />
+        <DashCard
+          borrowed={borrowed}
+          polypusAbi={polypusAbi}
+          contractAddress={contractAddress}
+          runContractFunction={runContractFunction}
+        />
       </div>
       <div className="container p-5">
         <LendDashCard
