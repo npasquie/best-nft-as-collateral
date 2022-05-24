@@ -70,6 +70,34 @@ const LendCardLg = ({
               </p>
             </div>
           </div>
+          <div className="row inline-flex flex-wrap">
+            <div className="p-5 text-xl font-medium  text-white">
+              <p>
+                <span>{name} : #</span>
+                {id}
+              </p>
+            </div>
+            <div className="p-5 text-xl font-medium  text-white">
+              <p>
+                Total borrowed: <span>{totalBorrowed}</span>
+              </p>
+            </div>
+            <div className="p-5 text-xl font-medium  text-white">
+              <p>
+                Total borrowed: <span>{totalBorrowed}</span>
+              </p>
+            </div>
+            <div className="p-5 text-xl font-medium  text-white">
+              <p>
+                Countdown: <span>{countdown}</span>
+              </p>
+            </div>
+            <div className="p-5 text-xl font-medium text-white">
+              <p>
+                Interest: <span>{interest}</span>
+              </p>
+            </div>
+          </div>
         </div>
         <button
           onClick={() => {
