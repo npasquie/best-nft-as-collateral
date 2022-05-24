@@ -4,6 +4,7 @@ import Banner from "./connectBanner";
 import Footer from "./footer";
 import Navbar from "./Navbar";
 import { useEthers } from "@usedapp/core";
+import { useState } from "react";
 
 export default function Layout({ children }) {
   const { account } = useEthers();

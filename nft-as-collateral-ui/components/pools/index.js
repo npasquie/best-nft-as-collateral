@@ -3,7 +3,7 @@ import loan from "../../public/vectordesign1.svg";
 import borrow from "../../public/vectordesign2.svg";
 import NftImage from "../../public/images/image2.svg";
 
-const Pool = ({ myLoader, marketData }) => {
+const Pool = ({ setModalUp, myLoader, marketData, setBorrModalUp }) => {
   return (
     <div className="container m-auto">
       <div className=" flex-columns m-auto lg:flex w-full  lg:justify-between">
@@ -12,6 +12,7 @@ const Pool = ({ myLoader, marketData }) => {
             item;
           return (
             <PoolCard
+              setModalUp={setModalUp}
               myLoader={myLoader}
               key={id}
               name={name}
@@ -21,6 +22,7 @@ const Pool = ({ myLoader, marketData }) => {
               wpy={wpy}
               loanDuration={loanDuration}
               LTV={LTV}
+              setBorrModalUp={setBorrModalUp}
             />
           );
         })}

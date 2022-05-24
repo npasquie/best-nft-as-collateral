@@ -52,12 +52,17 @@ const LendCardLg = ({
             <div className="row inline-flex flex-wrap">
               <div className="p-5 text-xl font-medium  text-white">
                 <p>
-                  <span>Black Suit Bored Apes</span>
+                  <span>Bored Apes</span>
                 </p>
               </div>
               <div className="p-5 text-xl font-medium  text-white">
                 <p>
                   Supplied: <span>3.5 ETH</span>
+                </p>
+              </div>
+              <div className="p-5 text-xl font-medium text-white">
+                <p>
+                  Loan to value: <span>80 ETH</span>
                 </p>
               </div>
               <div className="p-5 text-xl font-medium  text-white">

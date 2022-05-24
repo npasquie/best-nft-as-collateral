@@ -2,7 +2,8 @@ import DashCard from "../components/dashcard";
 import LendDashCard from "../components/dashcard/lend";
 import imgSrc from "../public/images/image2.svg";
 import { contractAddress, polypusAbi } from "../constants";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { SupplyContext } from "./_app";
 
 export const dashCardData = {
   borrowed: [
@@ -32,6 +33,9 @@ const Dashboard = () => {
   const { borrowed, lent } = dashCardData;
 
   const [valueToLoan, setValueToLoan] = useState(0);
+  const hasSupplied = useContext(SupplyContext);
+
+  console.log(hasSupplied);
 
   return (
     <div className="section">
@@ -43,12 +47,14 @@ const Dashboard = () => {
         />
       </div>
       <div className="container p-5">
-        <LendDashCard
-          lent={lent}
-          polypusAbi={polypusAbi}
-          contractAddress={contractAddress}
-          valueToLoan={valueToLoan}
-        />
+        {hasSupplied.hasSupplied && (
+          <LendDashCard
+            lent={lent}
+            polypusAbi={polypusAbi}
+            contractAddress={contractAddress}
+            valueToLoan={valueToLoan}
+          />
+        )}
       </div>
     </div>
   );
