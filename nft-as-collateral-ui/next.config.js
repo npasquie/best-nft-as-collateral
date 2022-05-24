@@ -11,7 +11,7 @@ const nextConfig = withImages({
       "/": { page: "/" },
       "/Dashboard": { page: "/Dashboard" },
       "/Market": { page: "/Market" },
-      // "/Auction": { page: "/Auction" },
+      "/Auction": { page: "/Auction" },
     };
   },
   sassOptions: {

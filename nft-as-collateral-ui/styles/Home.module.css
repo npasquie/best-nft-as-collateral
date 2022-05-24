@@ -2,7 +2,7 @@
   background-color: blue;
 }
 .container {
-  with:100vw;
+  with: 100vw;
 }
 
 .main {
@@ -13,8 +13,6 @@
   //flex-direction: column;
   //justify-content: center;
   //align-items: center;
-
-
 }
 
 .footer {
@@ -24,7 +22,6 @@
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
-
 }
 
 .footer a {
@@ -35,14 +32,11 @@
   color: white;
 }
 
-
-
 .logo {
   height: 1em;
   margin-left: 0.5rem;
-  color:white !important;
+  color: white !important;
 }
 
 @media (max-width: 600px) {
-
 }
