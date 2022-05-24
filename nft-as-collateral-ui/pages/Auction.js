@@ -1,4 +1,4 @@
-import screenShot from "../public/Screenshot 2022-05-24 162248.png";
+import screenShot from "../public/unknown.png";
 
 import Image from "next/image";
 
