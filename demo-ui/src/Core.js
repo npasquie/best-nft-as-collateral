@@ -1,5 +1,7 @@
 import "./App.css";
+import dashaft from "./imgs/dashaft.png";
 import bayc from "./imgs/bayc.png";
+import auct from "./imgs/auct.png";
 import abi from "./abi";
 import borrbayc from "./imgs/borrbayc.png";
 import borr from "./imgs/borrowed.png";
@@ -11,7 +13,7 @@ import { useEthers, useContractFunction } from "@usedapp/core";
 import { Button, Container, Row, Col, Card, Alert } from "react-bootstrap";
 import { ethers } from "ethers";
 
-function Core({ page }) {
+function Core({ page, cameBack }) {
   const { account, chainId } = useEthers();
   const [clickCount, setClickCount] = useState(0);
   const interf = new ethers.utils.Interface(abi);
@@ -58,30 +60,62 @@ function Core({ page }) {
       )}
       {page == "dash" && (
         <>
-          <Card
-            style={{
-              backgroundColor: "#0A123E",
-              margin: "3em",
-              borderRadius: "1em",
-              color: "white",
-            }}
-          >
-            <Card.Body>
-              <Image style={{ padding: "1em" }} src={borr} />
-            </Card.Body>
-          </Card>
-          <Card
-            style={{
-              backgroundColor: "#0A123E",
-              margin: "3em",
-              borderRadius: "1em",
-              color: "white",
-            }}
-          >
-            <Card.Body>
-              <Image style={{ padding: "1em" }} src={lent} />
-            </Card.Body>
-          </Card>
+          {!cameBack && (
+            <>
+              <Card
+                style={{
+                  backgroundColor: "#0A123E",
+                  margin: "3em",
+                  borderRadius: "1em",
+                  color: "white",
+                }}
+              >
+                <Card.Body>
+                  <Image style={{ padding: "1em" }} src={borr} />
+                </Card.Body>
+              </Card>
+              <Card
+                style={{
+                  backgroundColor: "#0A123E",
+                  margin: "3em",
+                  borderRadius: "1em",
+                  color: "white",
+                }}
+              >
+                <Card.Body>
+                  <Image style={{ padding: "1em" }} src={lent} />
+                </Card.Body>
+              </Card>
+            </>
+          )}
+          {cameBack && (
+            <>
+              <Card
+                style={{
+                  backgroundColor: "#0A123E",
+                  margin: "3em",
+                  borderRadius: "1em",
+                  color: "white",
+                }}
+              >
+                <Card.Body>
+                  <Image style={{ padding: "1em" }} src={dashaft} />
+                </Card.Body>
+              </Card>
+              <Card
+                style={{
+                  backgroundColor: "#0A123E",
+                  margin: "3em",
+                  borderRadius: "1em",
+                  color: "white",
+                }}
+              >
+                <Card.Body>
+                  <Image style={{ padding: "1em" }} src={lent} />
+                </Card.Body>
+              </Card>
+            </>
+          )}
         </>
       )}
       {page == "market" && (
@@ -171,6 +205,22 @@ function Core({ page }) {
               </Card.Body>
             </Card>
           )}
+        </>
+      )}
+      {page == "auction" && (
+        <>
+          <Card
+            style={{
+              backgroundColor: "#0A123E",
+              margin: "3em",
+              borderRadius: "1em",
+              color: "white",
+            }}
+          >
+            <Card.Body>
+              <Image style={{ padding: "1em" }} src={auct} />
+            </Card.Body>
+          </Card>
         </>
       )}
     </>

@@ -16,6 +16,7 @@ const theme = {
 function App() {
   const { account, chainId } = useEthers();
   const [page, setPage] = useState("dash");
+  const [cameBack, setCameBack] = useState(false);
   return (
     <div className="App">
       <body
@@ -26,13 +27,13 @@ function App() {
           backgroundColor: "#0c102e",
         }}
       >
-        <Navbar setPage={setPage} />
+        <Navbar setPage={setPage} setCameBack={setCameBack} />
         {!account && (
           <>
             <Image src={conn}></Image>
           </>
         )}
-        {account && <Core page={page} />}
+        {account && <Core page={page} cameBack={cameBack} />}
       </body>
     </div>
   );
@@ -40,7 +41,7 @@ function App() {
 
 export default App;
 
-const Navbar = ({ setPage }) => {
+const Navbar = ({ setPage, setCameBack }) => {
   const { activateBrowserWallet, account, chainId } = useEthers();
   const [show, setshow] = useState(false);
   return (
@@ -88,6 +89,7 @@ const Navbar = ({ setPage }) => {
           <Button
             onClick={() => {
               setPage("dash");
+              setCameBack(true);
             }}
             className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100"
           >
@@ -101,9 +103,14 @@ const Navbar = ({ setPage }) => {
           >
             Markets
           </Button>
-          <a className="p-4 lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100">
+          <Button
+            onClick={() => {
+              setPage("auction");
+            }}
+            className="p-4 lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100"
+          >
             Auction
-          </a>
+          </Button>
           <a className="p-4 lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100">
             Docs
           </a>
