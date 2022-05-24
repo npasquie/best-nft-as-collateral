@@ -10,7 +10,7 @@ const nextConfig = withImages({
     return {
       "/": { page: "/" },
       "/Dashboard": { page: "/Dashboard" },
-      "/Market": { page: "/Market" },
+      "/Markets": { page: "/Markets" },
       "/Auction": { page: "/Auction" },
     };
   },
