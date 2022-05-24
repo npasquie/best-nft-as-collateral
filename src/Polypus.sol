@@ -90,17 +90,6 @@ contract Polypus is Storage, Ownable, BorrowLogic, Lens {
             revert unavailableMarket();
         }
 
-        /// ETHEREUM ///
-        // CETH.mint{value: msg.value}();
-
-        /// POLYGON & ARBITRUM ///
-        WETH.deposit{value: msg.value}();
-        WETH.approve(address(AAVE_LENDING_POOL), msg.value);
-        AAVE_LENDING_POOL.supply(
-            address(WETH),
-            msg.value,
-            address(this),
-            NO_REFERRAL_CODE
-        );
+        require(msg.value > 0);
     }
 }

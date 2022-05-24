@@ -33,8 +33,14 @@
 # forge create src/Flat/Comp-Rinkeby/PolypusFlat.sol:WadRayMath --private-key 5bb790627f7e5b86c28a82cb9f24cc0b4d773853edd668acda6358e5cac287bc --rpc-url https://rinkeby.arbitrum.io/rpc
 # 0xadc861e1301aaa6294eacbe3e83862efbcac18d0
 
-forge create src/Flat/Comp-Rinkeby/PolypusFlat.sol:Polypus --private-key \
+# forge create src/Flat/Comp-Rinkeby/PolypusFlat.sol:Polypus --private-key \
+#  5bb790627f7e5b86c28a82cb9f24cc0b4d773853edd668acda6358e5cac287bc \
+#  --libraries src/Flat/Comp-Rinkeby/PolypusFlat.sol:OfferBookLib:0xbf1098c21ca57db24bd1bb038485752bfdd44d73 \
+#  --libraries src/Flat/Comp-Rinkeby/PolypusFlat.sol:WadRayMath:0xadc861e1301aaa6294eacbe3e83862efbcac18d0 \
+#  --rpc-url https://rinkeby.arbitrum.io/rpc
+
+forge create src/demo/Polypus.sol:Polypus --private-key \
  5bb790627f7e5b86c28a82cb9f24cc0b4d773853edd668acda6358e5cac287bc \
- --libraries src/Flat/Comp-Rinkeby/PolypusFlat.sol:OfferBookLib:0xbf1098c21ca57db24bd1bb038485752bfdd44d73 \
- --libraries src/Flat/Comp-Rinkeby/PolypusFlat.sol:WadRayMath:0xadc861e1301aaa6294eacbe3e83862efbcac18d0 \
+ --libraries src/demo/Polypus.sol:OfferBookLib:0xbf1098c21ca57db24bd1bb038485752bfdd44d73 \
+ --libraries src/demo/Polypus.sol:WadRayMath:0xadc861e1301aaa6294eacbe3e83862efbcac18d0 \
  --rpc-url https://rinkeby.arbitrum.io/rpc
