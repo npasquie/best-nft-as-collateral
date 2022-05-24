@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import { MoralisProvider } from "react-moralis";
 import { NotificationProvider } from "web3uikit";
-import { useRouter } from "next/router";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Layout from "../components/Layout";
 
@@ -23,9 +22,6 @@ const theme = {
 };
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter();
-
-  console.log(router.basePath);
   return (
     <MoralisProvider
       // appId="sBU4FWFBy3XjXNBNBOR72fdSAncpJnHRRsVsYxiT" serverUrl={serverUrl}
@@ -35,7 +31,7 @@ function MyApp({ Component, pageProps }) {
         <GlobalStyle />
         <ThemeProvider theme={theme}>
           <Layout>
-            <Component {...pageProps} key={router.asPath} />
+            <Component {...pageProps} />
           </Layout>
         </ThemeProvider>
       </NotificationProvider>
