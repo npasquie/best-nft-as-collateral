@@ -49,14 +49,14 @@ const Navbar = () => {
         id="navigation"
       >
         <div className="text-xl flex flex-col items-center lg:flex-row lg:flex lg:ml-auto text-white">
-          <Link href="/Dashbord" passHref>
+          <Link href="/Dashboard" passHref>
             <a
               onClick={() => {
                 setshow(!show);
               }}
               className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100"
             >
-              Dashbord
+              Dashboard
             </a>
           </Link>
           <Link href="/Markets" passHref>

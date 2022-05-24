@@ -29,7 +29,7 @@ export const dashCardData = {
   ],
 };
 
-const Dashbord = () => {
+const Dashboard = () => {
   const { borrowed, lent } = dashCardData;
 
   const { account } = useMoralis();
@@ -70,4 +70,4 @@ const Dashbord = () => {
   );
 };
 
-export default Dashbord;
+export default Dashboard;
