@@ -85,9 +85,14 @@ const Navbar = ({ setPage }) => {
         id="navigation"
       >
         <div className="text-xl flex flex-col items-center lg:flex-row lg:flex lg:ml-auto text-white">
-          <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100">
+          <Button
+            onClick={() => {
+              setPage("dash");
+            }}
+            className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100"
+          >
             Dashboard
-          </a>
+          </Button>
           <Button
             className="lg:inline-flex lg:w-auto px-3 py-2 rounded text-white hover:text-blue-900 hover:bg-yellow-100"
             onClick={() => {
