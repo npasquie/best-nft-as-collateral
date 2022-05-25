@@ -42,7 +42,7 @@ const marketData = [
     liquity: "11k ETH",
     wpy: "5% max",
     loanDuration: "2weeks",
-    LTV: "2 ETH",
+    LTV: "100 ETH",
   },
   {
     id: "Crpytopunks",
