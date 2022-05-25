@@ -67,7 +67,7 @@ const LendCardLg = ({
               </div>
               <div className="p-5 text-xl font-medium  text-white">
                 <p>
-                  Countdown: <span>Claim in 10 days</span>
+                  Countdown: <span>Claim in 14 days</span>
                 </p>
               </div>
               <div className="p-5 text-xl font-medium text-white">

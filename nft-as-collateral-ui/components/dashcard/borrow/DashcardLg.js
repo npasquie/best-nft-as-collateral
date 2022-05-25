@@ -77,12 +77,12 @@ const DashcardLg = ({
 
               <div className="p-5 text-xl font-medium text-white">
                 <p>
-                  Countdown: <span>5 days left</span>
+                  Countdown: <span>14 days left</span>
                 </p>
               </div>
               <div className="p-5 text-xl font-medium text-white">
                 <p>
-                  Interest: <span>5%</span>
+                  Interest: <span>5% per week</span>
                 </p>
               </div>
             </div>
@@ -133,12 +133,12 @@ const DashcardLg = ({
 
               <div className="p-5 text-xl font-medium text-white">
                 <p>
-                  Countdown: <span>8 days left</span>
+                  Countdown: <span>7 days left</span>
                 </p>
               </div>
               <div className="p-5 text-xl font-medium text-white">
                 <p>
-                  Interest: <span>5%</span>
+                  Interest: <span>5% per week</span>
                 </p>
               </div>
             </div>

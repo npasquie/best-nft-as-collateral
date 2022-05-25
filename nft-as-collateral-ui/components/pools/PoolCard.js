@@ -13,6 +13,9 @@ const PoolCard = ({
   setModalUp,
   setBorrModalUp,
 }) => {
+  console.log(setModalUp);
+  console.log(setBorrModalUp);
+
   return (
     <>
       <div className="flex flex-col  lg:w-3/5  rounded-lg shadow-lg m-4 p-3 bg-blue-700 ">

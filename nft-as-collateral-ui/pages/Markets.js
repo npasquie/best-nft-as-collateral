@@ -40,7 +40,7 @@ const marketData = [
     image: boredApe,
     alt: "boredape",
     liquity: "11k ETH",
-    wpy: "3% max",
+    wpy: "5% max",
     loanDuration: "2weeks",
     LTV: "2 ETH",
   },
@@ -239,8 +239,15 @@ const Markets = () => {
               }}
               src={ba8229}
             ></img>
+            <br />
+            <div
+              style={{ paddingTop: "2em", paddingLeft: "2em", color: "white" }}
+            >
+              Market conditions : up to 100 ETH available to borrow per NFT
+            </div>
+            <br />
             <div style={{ padding: "2em", color: "white" }}>
-              Amount : <input style={{ color: "black" }}></input>
+              Amount : <input style={{ color: "black" }}></input> ETH
               <button
                 onClick={() => {
                   tx2.send();
